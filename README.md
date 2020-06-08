@@ -6,12 +6,21 @@ This service is a component of MyEMS to publish data to MQTT broker.
 
 
 ### Prerequisites
+simplejson
 
 paho-mqtt
 
 mysql.connector
 
 ### Installation
+
+Download and Install simplejson
+```
+$ cd ~/tools
+$ git clone https://github.com/simplejson/simplejson.git
+$ cd simplejson
+$ sudo python3 setup.py install 
+```
 
 Download and install MySQL Connector:
 ```
@@ -60,4 +69,6 @@ Start the service:
   [1]. http://myems.io
   
   [2]. https://www.eclipse.org/paho/clients/python/
+  
+  [3]. https://simplejson.readthedocs.io/
 

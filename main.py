@@ -22,10 +22,10 @@ def main():
     logger.addHandler(fh)
 
     # create acquisition processes
-    Process(target=acquisition.process, args=(logger, 'ANALOG_VALUE')).start()
+    # Process(target=acquisition.process, args=(logger, 'ANALOG_VALUE')).start()
 
-    Process(target=acquisition.process, args=(logger, 'DIGITAL_VALUE')).start()
-
+    # Process(target=acquisition.process, args=(logger, 'DIGITAL_VALUE')).start()
+    #
     Process(target=acquisition.process, args=(logger, 'ENERGY_VALUE')).start()
 
 

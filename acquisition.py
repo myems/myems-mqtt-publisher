@@ -2,6 +2,7 @@ import json
 import mysql.connector
 import time
 from datetime import datetime, timezone
+import simplejson as json
 import paho.mqtt.client as mqtt
 import config
 
@@ -162,8 +163,7 @@ def process(logger, object_type):
             try:
                 # replace "," at the end of string with ")"
                 cursor_historical_db.execute(query[:-1] + ")")
-                cnx_historical_db.commit()
-                rows_point_values = cnx_historical_db.fetchall()
+                rows_point_values = cursor_historical_db.fetchall()
             except Exception as e:
                 logger.error("Error in step 4.1 of acquisition process " + str(e))
                 if cursor_historical_db:
@@ -180,7 +180,7 @@ def process(logger, object_type):
 
             if rows_point_values is None or len(rows_point_values) == 0:
                 # there is no points
-                logger.error("Error in step 4.2 of acquisition process: Point value Not Found")
+                print(" Point value Not Found")
 
                 # sleep 60 seconds and go back to the begin of inner while loop
                 time.sleep(60)
@@ -201,8 +201,10 @@ def process(logger, object_type):
             ############################################################################################################
             # Step 5: Publish point values
             ############################################################################################################
+
             if len(point_value_list) > 0 and mqtt_connected_flag:
                 for point_value in point_value_list:
+                    print(point_value)
                     try:
                         # publish real time value to mqtt broker
                         payload = json.dumps({'data_source_id': point_value['data_source_id'],
