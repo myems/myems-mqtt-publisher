@@ -16,10 +16,10 @@ mysql.connector
 
 Download and Install simplejson
 ```
-$ cd ~/tools
-$ git clone https://github.com/simplejson/simplejson.git
-$ cd simplejson
-$ sudo python3 setup.py install 
+    $ cd ~/tools
+    $ git clone https://github.com/simplejson/simplejson.git
+    $ cd simplejson
+    $ sudo python3 setup.py install 
 ```
 
 Download and install MySQL Connector:
@@ -40,28 +40,21 @@ Download and install paho-mqtt:
 ```
 
 Install myems-mqtt-publisher service
-```bash
+```
     $ cd ~
     $ git clone https://github.com/myems/myesm-mqtt-publisher.git
-    $ sudo cp -R ~/myems-mqtt-publisher /myems-mqtt-publisher
-    $ cd /myems-mqtt-publisher
     $ sudo git checkout master (or the release tag)
+    $ sudo cp -R ~/myesm-mqtt-publisher /myesm-mqtt-publisher
 ```
-Open config file and edit database configuration
-```bash
-    $ sudo nano config.py
+    Eidt the config
 ```
-Setup systemd service:
-```bash
-    $ sudo cp myems-mqtt-publisher.service /lib/systemd/system/
+    $ sudo nano /myems-myesm-mqtt-publisher/config.py
 ```
-Enable the service:
-```bash
-    $ sudo systemctl enable myems-mqtt-publisher.service
+    Setup systemd service:
 ```
-Start the service:
-```bash
-    $ sudo systemctl start myems-mqtt-publisher.service
+    $ sudo cp /myems-myesm-mqtt-publisher/myems-myesm-mqtt-publisher.service /lib/systemd/system/
+    $ sudo systemctl enable myems-myesm-mqtt-publisher.service
+    $ sudo systemctl start myems-myesm-mqtt-publisher.service
 ```
 
 
