@@ -57,6 +57,29 @@ Install myems-mqtt-publisher service
     $ sudo systemctl start myems-myesm-mqtt-publisher.service
 ```
 
+### Topic
+topic_prefix in config and point_id
+
+Example:
+```
+'myems/point/3'
+```
+
+### Payload
+data_source_id, the Data Source ID.
+
+point_id, the Point ID.
+
+object_type, the type of data, is one of 'ANALOG_VALUE'(decimal(18, 3)) , 'ENERGY_VALUE'(decimal(18, 3)) and 'DIGITAL_VALUE'(int(11)).
+
+utc_date_time, the date time in utc when data was acquired. The full format looks like 'YYYY-MM-DDTHH:MM:SS'.
+
+value, the data value in Decimal or Integer.
+
+Example:
+```
+{"data_source_id": 1, "point_id": 3, "object_type": 'ANALOG_VALUE', "utc_date_time": "2020-09-28T03:23:06", "value": Decimal('591960276.000')}
+```
 
 ### References
   [1]. http://myems.io

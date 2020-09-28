@@ -1,7 +1,6 @@
 import json
 import mysql.connector
 import time
-from datetime import datetime, timezone
 import simplejson as json
 import paho.mqtt.client as mqtt
 import config
@@ -191,10 +190,11 @@ def process(logger, object_type):
                 point_id = row_point_value[0]
                 point = point_dict.get(point_id)
                 data_source_id = point['data_source_id']
-                utc_date_time = row_point_value[1].replace(tzinfo=timezone.utc).timestamp() * 1000
+                utc_date_time = row_point_value[1].replace(tzinfo=None).isoformat(timespec='seconds')
                 value = row_point_value[2]
                 point_value_list.append({'data_source_id': data_source_id,
                                          'point_id': point_id,
+                                         'object_type': object_type,
                                          'utc_date_time': utc_date_time,
                                          'value': value})
 
@@ -204,17 +204,19 @@ def process(logger, object_type):
 
             if len(point_value_list) > 0 and mqtt_connected_flag:
                 for point_value in point_value_list:
-                    print(point_value)
                     try:
                         # publish real time value to mqtt broker
+                        topic = config.topic_prefix + str(point_value['point_id'])
+                        print('topic=' + topic)
                         payload = json.dumps({'data_source_id': point_value['data_source_id'],
                                               'point_id': point_value['point_id'],
+                                              'object_type': point_value['object_type'],
                                               'utc_date_time': point_value['utc_date_time'],
                                               'value': point_value['value']})
                         print('payload=' + str(payload))
-                        info = mqc.publish('myems/point/' + str(point_value['point_id']),
+                        info = mqc.publish(topic=topic,
                                            payload=payload,
-                                           qos=0,
+                                           qos=config.qos,
                                            retain=True)
                     except Exception as e:
                         logger.error("Error in step 5 of acquisition process: " + str(e))

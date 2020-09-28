@@ -1,7 +1,11 @@
-import json
+import simplejson as json
 import config
 import time
+from datetime import datetime
 import paho.mqtt.client as mqtt
+import random
+import decimal
+
 
 # global flag indicates the connectivity with the MQTT broker
 mqtt_connected_flag = False
@@ -32,7 +36,7 @@ def on_mqtt_disconnect(client, userdata, rc=0):
 # Test Procedures
 # Step 1: Connect the MQTT broker
 # Step 2: Publish test topic messages
-# Step 3: Run 'mosquitto_sub -h 192.168.0.1 -v -t myems/point/3 -u admin -P Password1' to receive test messages
+# Step 3: Run 'mosquitto_sub -h 192.168.0.1 -v -t myems/point/# -u admin -P Password1' to receive test messages
 ########################################################################################################################
 
 def main():
@@ -56,7 +60,8 @@ def main():
                 # publish real time value to mqtt broker
                 payload = json.dumps({"data_source_id": 1,
                                       "point_id": 3,
-                                      "value": 5678.9})
+                                      "utc_date_time": datetime.utcnow().isoformat(timespec='seconds'),
+                                      "value": decimal.Decimal(random.randrange(0, 10000))})
                 print('payload=' + str(payload))
                 info = mqc.publish('myems/point/' + str(3),
                                    payload=payload,
