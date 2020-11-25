@@ -3,7 +3,7 @@
 ### Introduction
 This service is a component of MyEMS to publish data to MQTT broker.
 
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/myems/myems-mqtt-publisher/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/myems/myems-mqtt-publisher/?branch=master)
 
 ### Prerequisites
 simplejson
