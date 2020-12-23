@@ -234,7 +234,7 @@ def process(logger, object_type):
                         break
 
             # sleep some seconds
-            time.sleep(config.period_in_seconds)
+            time.sleep(config.interval_in_seconds)
         # end of inner while loop
 
     # end of outermost while loop
