@@ -3,6 +3,7 @@ myems_system_db = {
     'password': '!MyEMS1',
     'host': '127.0.0.1',
     'database': 'myems_system_db',
+    'port': 3306,
 }
 
 myems_historical_db = {
@@ -10,6 +11,7 @@ myems_historical_db = {
     'password': '!MyEMS1',
     'host': '127.0.0.1',
     'database': 'myems_historical_db',
+    'port': 3306,
 }
 
 myems_mqtt_broker = {
@@ -26,4 +28,4 @@ qos = 0
 # The topic prefix that the message should be published on.
 topic_prefix = 'myems/point/'
 
-period_in_seconds = 60
+interval_in_seconds = 60
